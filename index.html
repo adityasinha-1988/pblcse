@@ -12,21 +12,16 @@
         .max-container { max-width: 1550px; margin: 0 auto; }
         .bento-card { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 28px; padding: 1.5rem; transition: all 0.3s ease; }
         .date-hero { font-size: 6rem; font-weight: 900; line-height: 0.8; letter-spacing: -0.05em; }
-        /* Logo Padding Fix */
-        .logo-box { background: white; padding: 6px; border-radius: 14px; border: 1.5px solid #f1f5f9; display: flex; align-items: center; justify-content: center; shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        .search-box { background: #f8fafc; border: 2px solid #e2e8f0; border-radius: 20px; padding: 1rem 1.5rem; width: 100%; font-weight: 700; font-size: 14px; }
+        .search-box:focus { border-color: #2563eb; outline: none; background: white; }
     </style>
 </head>
-<body class="p-2 md:p-3">
+<body class="p-2 md:p-3 text-left">
 
     <nav class="fixed top-0 left-0 w-full z-50 bg-white/95 backdrop-blur-md border-b border-slate-200 px-8 py-3 flex justify-between items-center">
-        <div class="flex items-center gap-5">
-            <div class="logo-box" style="height: 52px; width: 52px;">
-                <img src="mujlogo.jpg" alt="MUJ" class="h-full w-auto object-contain">
-            </div>
-            <div class="flex flex-col">
-                <span class="text-xl font-900 tracking-tighter leading-none uppercase">PBL <span class="text-blue-600">2026</span></span>
-                <span class="text-[9px] text-slate-500 font-800 uppercase tracking-widest leading-none mt-1">Computer Science & Engineering</span>
-            </div>
+        <div class="flex flex-col">
+            <span class="text-xl font-900 tracking-tighter leading-none uppercase">PBL <span class="text-blue-600 italic">2026</span></span>
+            <span class="text-[9px] text-slate-500 font-800 uppercase tracking-widest leading-none mt-1">Computer Science & Engineering</span>
         </div>
         <a href="https://forms.gle/u2ghp6UiDgRkjz1T7" target="_blank" class="bg-blue-600 hover:bg-blue-700 px-6 py-2.5 rounded-xl font-900 text-[11px] text-white transition uppercase tracking-widest shadow-md">Submit Project Details</a>
     </nav>
@@ -36,80 +31,73 @@
         <div class="bg-slate-900 rounded-[2.5rem] p-8 text-white flex justify-between items-center shadow-xl">
             <div class="text-left">
                 <h1 class="text-4xl md:text-5xl font-900 tracking-tight leading-none uppercase">PBL Information <span class="text-blue-400 italic">Portal</span></h1>
-                <p class="text-slate-400 font-semibold text-lg italic mt-2">Central Resource Hub for Mid Term Evaluation.</p>
+                <p class="text-slate-400 font-semibold text-lg italic mt-2">Central Resource Hub for PBL Mid Term Evaluation.</p>
             </div>
             <div class="hidden lg:block text-right">
-                <p class="text-blue-400 font-900 text-sm uppercase tracking-widest">Phase-II 2026</p>
-                <p class="text-slate-500 text-[10px] font-bold mt-1 uppercase tracking-widest">Department Evaluator Access Only</p>
+                <p class="text-red-500 font-900 text-xs uppercase tracking-widest animate-pulse italic leading-none">No Entry in Form = No Presentation</p>
+                <p class="text-slate-500 text-[10px] font-bold mt-2 uppercase tracking-widest">Dept of CSE, MUJ</p>
             </div>
         </div>
 
-        <div class="bg-blue-50 border-2 border-blue-100 rounded-2xl p-3 flex items-center justify-center gap-3 text-blue-800">
-            <i class="fas fa-info-circle animate-pulse"></i>
-            <span class="font-900 uppercase text-[11px] tracking-widest text-center">Venue and Panel details will be shared here soon. Keep checking for updates.</span>
+        <div class="bento-card border-l-[10px] border-blue-600 shadow-md">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+                <div class="w-full md:w-1/3 text-left">
+                    <h2 class="text-2xl font-900 uppercase tracking-tighter leading-tight italic">Venue & Panel Finder</h2>
+                    <p class="text-slate-500 text-[10px] font-bold mt-1 uppercase tracking-widest">Search by Faculty Name</p>
+                </div>
+                <div class="w-full md:w-2/3">
+                    <input type="text" id="panelSearch" onkeyup="findPanel()" placeholder="Start typing name (Ex: Neha, Ashish, Ajay)..." class="search-box">
+                </div>
+            </div>
+            
+            <div id="searchResult" class="mt-6 hidden">
+                <div class="bg-slate-50 border border-slate-200 rounded-[2rem] p-6 text-left">
+                    <p class="text-[10px] font-900 text-slate-400 uppercase tracking-widest mb-4 ml-2 italic">Matching Faculty Results:</p>
+                    <div id="resultsList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+                </div>
+            </div>
         </div>
 
         <div class="grid grid-cols-12 gap-5">
-            <div id="schedule" class="col-span-12 lg:col-span-8 bento-card border-t-[8px] border-blue-600">
+            <div id="schedule" class="col-span-12 lg:col-span-8 bento-card border-t-[8px] border-blue-600 text-left">
                 <h2 class="text-[10px] font-900 mb-6 tracking-[0.4em] text-slate-400 uppercase italic">Mid Term Evaluation Schedule</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div class="space-y-3">
                         <span class="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-[10px] font-900 uppercase">6th Sem | PBL-4</span>
                         <div class="date-hero">FEB 18</div>
-                        <div class="font-900 text-slate-500 text-lg border-l-4 border-blue-600 pl-4">09:30 AM — 05:00 PM</div>
+                        <div class="font-900 text-slate-500 text-lg border-l-4 border-blue-600 pl-4 uppercase">09:30 AM — 05:00 PM</div>
                     </div>
                     <div class="space-y-3">
                         <span class="bg-indigo-100 text-indigo-700 px-3 py-1 rounded-full text-[10px] font-900 uppercase">4th Sem | PBL-2</span>
                         <div class="date-hero">FEB 19</div>
-                        <div class="font-900 text-slate-500 text-lg border-l-4 border-indigo-600 pl-4">09:30 AM — 05:00 PM</div>
+                        <div class="font-900 text-slate-500 text-lg border-l-4 border-indigo-600 pl-4 uppercase">09:30 AM — 05:00 PM</div>
                     </div>
                 </div>
             </div>
 
-            <div id="rules" class="col-span-12 lg:col-span-4 bento-card border-t-[8px] border-red-500 bg-slate-50">
+            <div id="rules" class="col-span-12 lg:col-span-4 bento-card border-t-[8px] border-red-500 bg-slate-50 text-left shadow-inner">
                 <h2 class="text-[10px] font-900 mb-6 tracking-[0.4em] text-slate-400 uppercase italic">Strict Rules</h2>
-                <div class="space-y-4">
-                    <div class="flex gap-4">
-                        <span class="text-red-500 font-900 text-xl">01</span>
-                        <p class="text-[13px] font-800 text-slate-800 leading-tight">Hosting via Live Page (GitHub) ONLY.</p>
-                    </div>
-                    <div class="flex gap-4">
-                        <span class="text-red-500 font-900 text-xl">02</span>
-                        <p class="text-[13px] font-800 text-slate-800 leading-tight italic">Use FULL Reg ID (23FE... or 24FE...) while filling form.</p>
-                    </div>
-                    <div class="flex gap-4">
-                        <span class="text-red-500 font-900 text-xl">03</span>
-                        <p class="text-[13px] font-800 text-slate-800 leading-tight">7-8 Mins Presentation + 2 Mins Q&A Max.</p>
-                    </div>
-                    <div class="flex gap-4">
-                        <span class="text-red-500 font-900 text-xl">04</span>
-                        <p class="text-[13px] font-800 text-slate-800 leading-tight">Strict College Formals mandatory for all.</p>
-                    </div>
+                <div class="space-y-4 font-800 text-slate-800 text-[13px]">
+                    <p>01 Hosting via Live Page (GitHub) ONLY.</p>
+                    <p>02 Use FULL Reg ID while filling form.</p>
+                    <p>03 7-8 Mins Presentation + 2 Mins Q&A.</p>
+                    <p class="text-red-600 font-black uppercase underline leading-tight italic">04 No Entry in Form = No Presentation.</p>
                 </div>
             </div>
 
-            <div id="hosting" class="col-span-12 bento-card border-2 border-dashed border-slate-200">
-                <div class="flex justify-between items-center mb-6">
+            <div id="hosting" class="col-span-12 bento-card border-2 border-dashed border-slate-200 text-left">
+                <div class="flex flex-col md:flex-row justify-between items-center mb-6 gap-4">
                     <h2 class="text-xl font-900 uppercase text-slate-900 flex items-center gap-3"><i class="fab fa-github"></i> Rapid Hosting Steps</h2>
-                    <button onclick="downloadTemplate()" class="bg-slate-900 text-white px-8 py-3 rounded-xl font-black text-[10px] hover:bg-blue-600 transition uppercase tracking-widest shadow-lg">Download Mandatory Template</button>
+                    <div class="flex gap-3">
+                        <a href="https://www.youtube.com/watch?v=BT4WzyT2g8k" target="_blank" class="bg-red-600 text-white px-6 py-3 rounded-xl font-black text-[10px] hover:bg-red-700 transition uppercase tracking-widest shadow-lg flex items-center gap-2"><i class="fab fa-youtube"></i> Video Tutorial</a>
+                        <button onclick="downloadTemplate()" class="bg-slate-900 text-white px-6 py-3 rounded-xl font-black text-[10px] hover:bg-blue-600 transition uppercase tracking-widest shadow-lg">Download Template</button>
+                    </div>
                 </div>
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-4 text-[11px] font-bold text-slate-600">
-                    <div class="p-4 bg-slate-50 rounded-2xl">
-                        <p class="text-blue-600 font-900 mb-1">STEP 01</p>
-                        <p>Public Repo: <b class="text-slate-900">pbl_projectname</b></p>
-                    </div>
-                    <div class="p-4 bg-blue-50/50 rounded-2xl border border-blue-100">
-                        <p class="text-blue-600 font-900 mb-1">STEP 02</p>
-                        <p>Upload <b class="text-blue-700 underline cursor-pointer" onclick="downloadTemplate()">index.html</b> & <b class="text-slate-900">mujlogo.jpg</b></p>
-                    </div>
-                    <div class="p-4 bg-slate-50 rounded-2xl">
-                        <p class="text-blue-600 font-900 mb-1">STEP 03</p>
-                        <p class="italic">Settings > Pages > Select 'main' branch</p>
-                    </div>
-                    <div class="p-4 bg-slate-50 rounded-2xl">
-                        <p class="text-blue-600 font-900 mb-1">STEP 04</p>
-                        <p>Submit <b class="text-slate-900">Live URL</b> via Submission Form</p>
-                    </div>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-[11px] font-bold text-slate-600">
+                    <div class="p-4 bg-slate-50 rounded-2xl"><p class="text-blue-600 font-900 mb-1 leading-none uppercase tracking-tighter">Step 01</p><p>Public Repo: <b class="text-slate-900 italic">pbl_project</b></p></div>
+                    <div class="p-4 bg-blue-50/50 rounded-2xl border border-blue-100"><p class="text-blue-600 font-900 mb-1 leading-none uppercase tracking-tighter">Step 02</p><p>Upload <b class="text-blue-700 underline cursor-pointer" onclick="downloadTemplate()">index.html</b></p></div>
+                    <div class="p-4 bg-slate-50 rounded-2xl"><p class="text-blue-600 font-900 mb-1 leading-none uppercase tracking-tighter">Step 03</p><p>Settings > Pages > 'main' branch</p></div>
+                    <div class="p-4 bg-slate-50 rounded-2xl"><p class="text-blue-600 font-900 mb-1 leading-none uppercase tracking-tighter">Step 04</p><p>Submit Live URL via Form</p></div>
                 </div>
             </div>
         </div>
@@ -120,10 +108,56 @@
     </footer>
 
     <script>
-        // Direct Download Link to your GitHub file
-        function downloadTemplate() {
-            window.location.href = 'pbl_ppt_template.html'; 
+        const panelData = [
+            {"no": "Panel-1", "room": "SDC Discussion Room", "p4": "Dr. Jay Shankar Sharma", "p2": "Dr. Gunjan Pathak", "members": ["Dr. Jay Shankar Sharma", "Dr. Amit Garg", "Dr. Gunjan Pathak", "Dr. Rishi Kumar Shrivastava", "Dr. Nilesh Dubey"]},
+            {"no": "Panel-2", "room": "LHC-217", "p4": "Dr. Kirti Paliwal", "p2": "Dr. Soni Gupta", "members": ["Dr. Kirti Paliwal", "Dr. Rishi Gupta", "Dr. Dibakar Sinha", "Dr. Soni Gupta"]},
+            {"no": "Panel-3", "room": "LHC-201", "p4": "Dr. Mayank Namdev", "p2": "Dr. Madhu Sharma", "members": ["Dr. Mayank Namdev", "Dr. Ajay Kumar", "Dr. Ajit Noonia", "Dr. Madhu Sharma"]},
+            {"no": "Panel-4", "room": "LHC-202", "p4": "Dr. Arpita Baronia", "p2": "Dr. Manmohan Sharma", "members": ["Dr. Arpita Baronia", "Dr. Amit Kumar Gupta", "Dr. Ankur Pandey", "Dr. Girish Sharma", "Dr. Manmohan Sharma"]},
+            {"no": "Panel-5", "room": "LHC-203", "p4": "Dr. Anil Kumar", "p2": "Dr. Mahesh Jangid", "members": ["Dr. Anil Kumar", "Dr. Ankit Shrivastava", "Dr. Ashish Sharma", "Dr. Mahesh Jangid"]},
+            {"no": "Panel-6", "room": "Meeting Room 2", "p4": "Dr. Riddhi Arora", "p2": "Dr. Virendra Meghwal", "members": ["Dr. Riddhi Arora", "Dr. C. S. Lamba", "Dr. Rajat Goel", "Dr. Virendra Meghwal"]},
+            {"no": "Panel-7", "room": "LHC-205", "p4": "Dr. Manu Shrivastava", "p2": "Dr. Sachin Gupta", "members": ["Dr. Manu Shrivastava", "Dr. Sandeep Chaurasia", "Dr. Praneet Saurabh", "Dr. Sachin Gupta", "Dr. Neetu Gupta"]},
+            {"no": "Panel-8", "room": "LHC-206", "p4": "Dr. Neelam Chaplot", "p2": "Dr. Santoshi Rudrakar", "members": ["Dr. Neelam Chaplot", "Dr. Neha Chaudhary", "Dr. Usha Jain", "Dr. Santoshi Rudrakar"]},
+            {"no": "Panel-9", "room": "LHC-207", "p4": "Dr. Ashok Kumar Saini", "p2": "Dr. Juhi Singh", "members": ["Dr. Ashok Kumar Saini", "Dr. Atul Verma", "Dr. Juhi Singh", "Dr. Prashant Vats", "Dr. Arshpreet Kaur"]},
+            {"no": "Panel-10", "room": "LHC-208", "p4": "Dr. Tripti Kulshrestha", "p2": "Dr. Sushama Tanwar", "members": ["Dr. Tripti Kulshrestha", "Dr. Sushama Tanwar", "Dr. Vivek Singh Sikarwar", "Dr. Umashankar Rawat"]},
+            {"no": "Panel-11", "room": "LHC-209", "p4": "Dr. Onkar Singh", "p2": "Dr. Amandeep Cheema", "members": ["Dr. Onkar Singh", "Dr. Surbhi Syal", "Dr. Amandeep Cheema", "Dr. Satyabrata Roy"]},
+            {"no": "Panel-12", "room": "LHC-103", "p4": "Dr. Tapan Kumar Dey", "p2": "Dr. Arvind Mehta", "members": ["Dr. Tapan Kumar Dey", "Dr. Ajay Kumar Kushwaha", "Dr. Arvind Mehta", "Dr. Shashvat", "Dr. Sakshi Shringi"]},
+            {"no": "Panel-13", "room": "LHC-104", "p4": "Dr. Shishir Singh Chauhan", "p2": "Dr. Mohit Kushwaha", "members": ["Dr. Shishir Singh Chauhan", "Dr. Harshika Mathur", "Dr. Mohit Kushwaha", "Dr. Ashish Kumar Dadhich"]},
+            {"no": "Panel-14", "room": "LHC-002", "p4": "Dr. Bali Devi", "p2": "Dr. Susheela Vishnoi", "members": ["Dr. Bali Devi", "Dr. Neha Janu", "Dr. Ashish Verma", "Dr. Gireesh Kumar Kaushik", "Dr. Susheela Vishnoi"]},
+            {"no": "Panel-15", "room": "Discussion Room-1", "p4": "Dr. Lav Upadhyay", "p2": "Dr. Manish Gupta", "members": ["Dr. Lav Upadhyay", "Dr. Shashank Gupta", "Dr. Manish Gupta", "Dr. Sayar Singh Shekhawat", "Dr. Sunita Singhal"]},
+            {"no": "Panel-16", "room": "LHC-210", "p4": "Dr. Bhawani Singh Rathore", "p2": "Dr. Rishav Dubey", "members": ["Dr. Bhawani Singh Rathore", "Dr. Rishav Dubey", "Dr. Aditya Sinha", "Dr. Satpal Singh Kuswaha"]},
+            {"no": "Panel-17", "room": "LHC-211", "p4": "Dr. Vijay Hasanpuri", "p2": "Dr. Divya Thakur", "members": ["Dr. Vijay Hasanpuri", "Dr. Akshay Jadhav", "Dr. Surbhi Sharma", "Dr. Jay Prakash Singh", "Dr. Divya Thakur"]},
+            {"no": "Panel-18", "room": "LHC-212", "p4": "Dr. Babita Tiwari", "p2": "Dr. Rajesh Chaudhary", "members": ["Dr. Babita Tiwari", "Dr. Shikha Mundra", "Dr. Vaishali Chauhan", "Dr. Rajesh Chaudhary"]},
+            {"no": "Panel-19", "room": "LHC 204", "p4": "Dr. Neha Singh", "p2": "Dr. Abhay Bisht", "members": ["Dr. Neha Singh", "Dr. Pallavi", "Dr. Abhay Bisht", "Dr. Anita Shrotriya", "Dr. Mohit Kumar"]},
+            {"no": "Panel-20", "room": "Discussion Room-2", "p4": "Dr. Shweta Sharma", "p2": "Dr. Jeya Krishnan", "members": ["Dr. Shweta Sharma", "Dr. Tarun Jain", "Dr. Varda Pareek", "Dr. Jeya Krishnan"]}
+        ];
+
+        function findPanel() {
+            const query = document.getElementById('panelSearch').value.toLowerCase();
+            const resDiv = document.getElementById('searchResult');
+            const listDiv = document.getElementById('resultsList');
+            if(query.length < 2) { resDiv.classList.add('hidden'); return; }
+
+            const matches = [];
+            panelData.forEach(p => {
+                p.members.forEach(m => {
+                    if (m.toLowerCase().includes(query)) matches.push({...p, matchedName: m});
+                });
+            });
+
+            if(matches.length > 0) {
+                resDiv.classList.remove('hidden');
+                listDiv.innerHTML = matches.map(m => `
+                    <div class="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm hover:shadow-md transition-all">
+                        <span class="bg-blue-600 text-white px-2 py-0.5 rounded-full text-[8px] font-900 uppercase tracking-widest leading-none">${m.no}</span>
+                        <h3 class="text-lg font-900 text-slate-900 mt-1">${m.room}</h3>
+                        <p class="text-blue-600 font-bold text-[11px] mb-2 uppercase italic">${m.matchedName}</p>
+                        <div class="text-[9px] text-slate-500 font-bold leading-tight uppercase tracking-widest leading-none">P4: ${m.p4}<br>P2: ${m.p2}</div>
+                    </div>
+                `).join('');
+            } else { resDiv.classList.add('hidden'); }
         }
+
+        function downloadTemplate() { window.location.href = 'pbl_ppt_template.html'; }
     </script>
 </body>
 </html>
